@@ -1,0 +1,26 @@
+chat-programma :
+	- https://github.com/MeshackMusundi/SignalChat
+chat-programma uitgelegd :
+	- https://www.codeproject.com/Articles/1181555/SignalChat-WPF-SignalR-Chat-Application
+	
+ECC:
+	- https://github.com/majunkang/EllipticCurveCrypto
+	
+AES:
+	- https://github.com/moserware/AES-Illustrated
+	
+Steganography api:
+	- https://github.com/TimeToogo/Pixelator.Api
+	
+ECC api:
+	-https://www.example-code.com/csharp/ecc_genkey.asp
+	
+ECDH api:
+	- https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.ecdiffiehellmancng?view=netframework-4.7.2
+	
+AES api:
+	- https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.aes?view=netframework-4.7.2
+	
+signing: 						DSA of RSA of ECC
+encryption of the symetric key:	ECDH of RSA of ECC
+symetric encryption:			AES
