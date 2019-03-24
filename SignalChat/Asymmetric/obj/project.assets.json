@@ -2,15 +2,6 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.2": {
-      "chilkat-x64/9.5.0.76": {
-        "type": "package",
-        "compile": {
-          "lib/net461/ChilkatDotNet46.dll": {}
-        },
-        "runtime": {
-          "lib/net461/ChilkatDotNet46.dll": {}
-        }
-      },
       "Microsoft.NETCore.App/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -220,29 +211,6 @@
     }
   },
   "libraries": {
-    "chilkat-x64/9.5.0.76": {
-      "sha512": "RcXhtHcxMRaDVddpH06Oh1w8bwuQNe35aEqYJJXJ/X+V4id2vKymv9mB1kXfVyxM9H3YpdCA5r5fyLxAvaeRdQ==",
-      "type": "package",
-      "path": "chilkat-x64/9.5.0.76",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "chilkat-x64.9.5.0.76.nupkg.sha512",
-        "chilkat-x64.nuspec",
-        "lib/net20/ChilkatDotNet2.dll",
-        "lib/net35/ChilkatDotNet2.dll",
-        "lib/net40/ChilkatDotNet4.dll",
-        "lib/net403/ChilkatDotNet4.dll",
-        "lib/net45/ChilkatDotNet45.dll",
-        "lib/net451/ChilkatDotNet45.dll",
-        "lib/net452/ChilkatDotNet45.dll",
-        "lib/net46/ChilkatDotNet46.dll",
-        "lib/net461/ChilkatDotNet46.dll",
-        "lib/net462/ChilkatDotNet46.dll",
-        "lib/net47/ChilkatDotNet47.dll",
-        "lib/net471/ChilkatDotNet47.dll"
-      ]
-    },
     "Microsoft.NETCore.App/2.2.0": {
       "sha512": "QU8taCyeyePwatrj+h+750lMnsPCq3YPaGmsdtSHXPCjDyjto2KT7QDNVet0oRliX4PjaINpyg0Yzd9DnQ/Wkw==",
       "type": "package",
@@ -714,8 +682,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
-      "Microsoft.NETCore.App >= 2.2.0",
-      "chilkat-x64 >= 9.5.0.76"
+      "Microsoft.NETCore.App >= 2.2.0"
     ]
   },
   "packageFolders": {
@@ -764,10 +731,6 @@
             "target": "Package",
             "version": "[2.2.0, )",
             "autoReferenced": true
-          },
-          "chilkat-x64": {
-            "target": "Package",
-            "version": "[9.5.0.76, )"
           }
         },
         "imports": [
@@ -777,17 +740,5 @@
         "warn": true
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'chilkat-x64 9.5.0.76' was restored using '.NETFramework,Version=v4.6.1' instead of the project target framework '.NETCoreApp,Version=v2.2'. This package may not be fully compatible with your project.",
-      "libraryId": "chilkat-x64",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v2.2"
-      ]
-    }
-  ]
+  }
 }
