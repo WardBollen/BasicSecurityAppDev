@@ -10,7 +10,7 @@
 *.userosscache
 *.sln.docstates
 *.ide-shm
-*.ide.wal
+*.ide-wal
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
