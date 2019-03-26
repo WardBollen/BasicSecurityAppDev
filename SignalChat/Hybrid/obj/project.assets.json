@@ -686,23 +686,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Work\\.nuget\\packages\\": {},
+    "C:\\Users\\11301232\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Work\\Documents\\TIN2\\Basic Security\\BasicSecurityAppDev\\SignalChat\\Hybrid\\Hybrid.csproj",
+      "projectUniqueName": "C:\\Users\\11301232\\Documents\\School\\##2S2\\Basic Security\\Groepswerk\\BasicSecurityAppDev\\SignalChat\\Hybrid\\Hybrid.csproj",
       "projectName": "Hybrid",
-      "projectPath": "C:\\Users\\Work\\Documents\\TIN2\\Basic Security\\BasicSecurityAppDev\\SignalChat\\Hybrid\\Hybrid.csproj",
-      "packagesPath": "C:\\Users\\Work\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Work\\Documents\\TIN2\\Basic Security\\BasicSecurityAppDev\\SignalChat\\Hybrid\\obj\\",
+      "projectPath": "C:\\Users\\11301232\\Documents\\School\\##2S2\\Basic Security\\Groepswerk\\BasicSecurityAppDev\\SignalChat\\Hybrid\\Hybrid.csproj",
+      "packagesPath": "C:\\Users\\11301232\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\11301232\\Documents\\School\\##2S2\\Basic Security\\Groepswerk\\BasicSecurityAppDev\\SignalChat\\Hybrid\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Work\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\11301232\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
