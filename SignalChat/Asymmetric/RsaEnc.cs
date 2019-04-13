@@ -19,11 +19,19 @@ namespace Asymmetric
             _publicKey = csp.ExportParameters(false);
         }
 
-        public string publicKeyString()
+        public string getPublicKeyString()
         {
             var stringWriter = new StringWriter();
             var xmlSerializer = new XmlSerializer(typeof(RSAParameters));
             xmlSerializer.Serialize(stringWriter,_publicKey);
+            return stringWriter.ToString();
+        }
+
+        public string getPrivateKeyString()
+        {
+            var stringWriter = new StringWriter();
+            var xmlSerializer = new XmlSerializer(typeof(RSAParameters));
+            xmlSerializer.Serialize(stringWriter, _privateKey);
             return stringWriter.ToString();
         }
 
