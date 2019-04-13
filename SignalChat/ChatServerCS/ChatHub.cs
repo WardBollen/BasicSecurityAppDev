@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Concurrent;
+using System.Security.Cryptography;
 using Microsoft.AspNet.SignalR;
 
 namespace ChatServerCS
@@ -79,7 +80,7 @@ namespace ChatServerCS
             }
         }
 
-        public void UnicastTextMessage(string recepient, string message)
+        public void UnicastTextMessage(string recepient, string message, Aes aes)
         {
             var sender = Clients.CallerState.UserName;
             if (!string.IsNullOrEmpty(sender) && recepient != sender &&
@@ -87,7 +88,7 @@ namespace ChatServerCS
             {
                 User client = new User();
                 ChatClients.TryGetValue(recepient, out client);
-                Clients.Client(client.ID).UnicastTextMessage(sender, message);
+                Clients.Client(client.ID).UnicastTextMessage(sender, message, aes);
             }
         }
 
