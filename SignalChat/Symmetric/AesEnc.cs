@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 
 namespace Symmetric
 {
-    class AesEnc
+    public class AesEnc
     {
         public static void Main()
         {
