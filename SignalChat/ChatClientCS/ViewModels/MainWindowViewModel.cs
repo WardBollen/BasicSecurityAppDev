@@ -13,11 +13,15 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Diagnostics;
 using System.Reactive.Linq;
+using System.Security.Cryptography;
+using System.Text;
+using ChatClientCS.Encryption;
 
 namespace ChatClientCS.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        private Aes myAes;
         private IChatService chatService;
         private IDialogService dialogService;
         private TaskFactory ctxTaskFactory;
@@ -246,7 +250,7 @@ namespace ChatClientCS.ViewModels
             try
             {
                 var recepient = _selectedParticipant.Name;
-                await chatService.SendUnicastMessageAsync(recepient, _textMessage);
+                await chatService.SendUnicastTextMessageAsync(recepient, _textMessage, myAes);
                 return true;
             }
             catch (Exception) { return false; }
@@ -338,6 +342,7 @@ namespace ChatClientCS.ViewModels
 
         #region Open Image Command
         private ICommand _openImageCommand;
+
         public ICommand OpenImageCommand
         {
             get
@@ -356,11 +361,13 @@ namespace ChatClientCS.ViewModels
         #endregion
 
         #region Event Handlers
-        private void NewTextMessage(string name, string msg, MessageType mt)
+        private void NewTextMessage(string name, string msg, MessageType mt, Aes myAes)
         {
+
             if (mt == MessageType.Unicast)
             {
-                ChatMessage cm = new ChatMessage { Author = name, Message = msg, Time = DateTime.Now };
+                ChatMessage cm = new ChatMessage { Author = name, Message = AesEnc.DecryptStringAes(msg, myAes.Key, myAes.IV), Time = DateTime.Now };
+                //todo: AesEnc.DecryptStringAes(Encoding.ASCII.GetBytes(msg), myAes.Key, myAes.IV)
                 var sender = _participants.Where((u) => string.Equals(u.Name, name)).FirstOrDefault();
                 ctxTaskFactory.StartNew(() => sender.Chatter.Add(cm)).Wait();
 
@@ -470,6 +477,7 @@ namespace ChatClientCS.ViewModels
 
         public MainWindowViewModel(IChatService chatSvc, IDialogService diagSvc)
         {
+            myAes = Aes.Create();
             dialogService = diagSvc;
             chatService = chatSvc;
 
