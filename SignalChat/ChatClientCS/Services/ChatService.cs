@@ -4,13 +4,15 @@ using System.Threading.Tasks;
 using ChatClientCS.Enums;
 using ChatClientCS.Models;
 using System.Net;
+using System.Security.Cryptography;
 using Microsoft.AspNet.SignalR.Client;
+using ChatClientCS.Encryption;
 
 namespace ChatClientCS.Services
 {
     public class ChatService : IChatService
     {
-        public event Action<string, string, MessageType> NewTextMessage;
+        public event Action<string, string, MessageType, Aes> NewTextMessage;
         public event Action<string, byte[], MessageType> NewImageMessage;
         public event Action<string> ParticipantDisconnected;
         public event Action<User> ParticipantLoggedIn;
@@ -27,15 +29,19 @@ namespace ChatClientCS.Services
 
         public async Task ConnectAsync()
         {
+            // Create a new instance of the Aes
+            // class.  This generates a new key and initialization 
+            // vector (IV).
+            
             connection = new HubConnection(url);
             hubProxy = connection.CreateHubProxy("ChatHub");
             hubProxy.On<User>("ParticipantLogin", (u) => ParticipantLoggedIn?.Invoke(u));
             hubProxy.On<string>("ParticipantLogout", (n) => ParticipantLoggedOut?.Invoke(n));
             hubProxy.On<string>("ParticipantDisconnection", (n) => ParticipantDisconnected?.Invoke(n));
             hubProxy.On<string>("ParticipantReconnection", (n) => ParticipantReconnected?.Invoke(n));
-            hubProxy.On<string, string>("BroadcastTextMessage", (n, m) => NewTextMessage?.Invoke(n, m, MessageType.Broadcast));
+            hubProxy.On<string, string, Aes>("BroadcastTextMessage", (n, m, p) => NewTextMessage?.Invoke(n, m, MessageType.Broadcast, p));
             hubProxy.On<string, byte[]>("BroadcastPictureMessage", (n, m) => NewImageMessage?.Invoke(n, m, MessageType.Broadcast));
-            hubProxy.On<string, string>("UnicastTextMessage", (n, m) => NewTextMessage?.Invoke(n, m, MessageType.Unicast));
+            hubProxy.On<string, string, Aes>("UnicastTextMessage", (n, m, p) => NewTextMessage?.Invoke(n, m, MessageType.Unicast, p));
             hubProxy.On<string, byte[]>("UnicastPictureMessage", (n, m) => NewImageMessage?.Invoke(n, m, MessageType.Unicast));
             hubProxy.On<string>("ParticipantTyping", (p) => ParticipantTyping?.Invoke(p));
 
@@ -75,6 +81,7 @@ namespace ChatClientCS.Services
         public async Task SendBroadcastMessageAsync(string msg)
         {
             await hubProxy.Invoke("BroadcastTextMessage", msg);
+            //todo: AesEnc.EncryptStringAes(msg, _myAes.Key, _myAes.IV)
         }
 
         public async Task SendBroadcastMessageAsync(byte[] img)
@@ -82,9 +89,9 @@ namespace ChatClientCS.Services
             await hubProxy.Invoke("BroadcastImageMessage", img);
         }
 
-        public async Task SendUnicastMessageAsync(string recepient, string msg)
+        public async Task SendUnicastTextMessageAsync(string recepient, string msg, Aes aes)
         {
-            await hubProxy.Invoke("UnicastTextMessage", new object[] { recepient, msg });
+            await hubProxy.Invoke("UnicastTextMessage", new object[] { recepient, AesEnc.EncryptStringAes(msg, aes.Key, aes.IV), aes });
         }
 
         public async Task SendUnicastMessageAsync(string recepient, byte[] img)
