@@ -1,4 +1,6 @@
-﻿namespace ChatServerCS
+﻿using System.Security.Cryptography;
+
+namespace ChatServerCS
 {
     public interface IClient
     {
@@ -8,7 +10,7 @@
         void ParticipantLogout(string name);
         void BroadcastTextMessage(string sender, string message);
         void BroadcastPictureMessage(string sender, byte[] img);
-        void UnicastTextMessage(string sender, string message);
+        void UnicastTextMessage(string sender, string message, Aes aes);
         void UnicastPictureMessage(string sender, byte[] img);
         void ParticipantTyping(string sender);
     }
