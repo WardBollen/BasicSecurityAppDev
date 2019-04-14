@@ -9,13 +9,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatServerCS", "ChatServerC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatClientCS", "ChatClientCS\ChatClientCS.csproj", "{16E32C6D-3B1E-48AD-BE7C-571413043AF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Symmetric", "Symmetric\Symmetric.csproj", "{803A399B-DF85-457A-A37B-4D740497AC9C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Symmetric", "Symmetric\Symmetric.csproj", "{803A399B-DF85-457A-A37B-4D740497AC9C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asymmetric", "Asymmetric\Asymmetric.csproj", "{AE094929-803A-4F5E-A6B7-4132A847E848}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Asymmetric", "Asymmetric\Asymmetric.csproj", "{AE094929-803A-4F5E-A6B7-4132A847E848}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hashing", "Hashing\Hashing.csproj", "{1330101B-D4B8-4086-88F4-F9A95140A3BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hashing", "Hashing\Hashing.csproj", "{1330101B-D4B8-4086-88F4-F9A95140A3BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hybrid", "Hybrid\Hybrid.csproj", "{64182D78-6E75-4164-8BEC-12003662A361}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hybrid", "Hybrid\Hybrid.csproj", "{64182D78-6E75-4164-8BEC-12003662A361}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -16,12 +16,14 @@ using System.Reactive.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using ChatClientCS.Encryption;
+using Hashing;
 
 namespace ChatClientCS.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
         private Aes myAes;
+        private Hasher myHasher;
         private IChatService chatService;
         private IDialogService dialogService;
         private TaskFactory ctxTaskFactory;
@@ -251,6 +253,7 @@ namespace ChatClientCS.ViewModels
             {
                 var recepient = _selectedParticipant.Name;
                 await chatService.SendUnicastTextMessageAsync(recepient, _textMessage, myAes);
+                //todo: start of send
                 return true;
             }
             catch (Exception) { return false; }
@@ -367,7 +370,7 @@ namespace ChatClientCS.ViewModels
             if (mt == MessageType.Unicast)
             {
                 ChatMessage cm = new ChatMessage { Author = name, Message = AesEnc.DecryptStringAes(msg, myAes.Key, myAes.IV), Time = DateTime.Now };
-                //todo: AesEnc.DecryptStringAes(Encoding.ASCII.GetBytes(msg), myAes.Key, myAes.IV)
+                //todo: receive encrypted message and decrypt
                 var sender = _participants.Where((u) => string.Equals(u.Name, name)).FirstOrDefault();
                 ctxTaskFactory.StartNew(() => sender.Chatter.Add(cm)).Wait();
 
@@ -478,6 +481,10 @@ namespace ChatClientCS.ViewModels
         public MainWindowViewModel(IChatService chatSvc, IDialogService diagSvc)
         {
             myAes = Aes.Create();
+            //todo: create AES
+            // Create a new instance of the Aes
+            // class.  This generates a new key and initialization 
+            // vector (IV).
             dialogService = diagSvc;
             chatService = chatSvc;
 

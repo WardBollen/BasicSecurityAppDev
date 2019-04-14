@@ -29,18 +29,12 @@ namespace ChatClientCS.Services
 
         public async Task ConnectAsync()
         {
-            // Create a new instance of the Aes
-            // class.  This generates a new key and initialization 
-            // vector (IV).
-            
             connection = new HubConnection(url);
             hubProxy = connection.CreateHubProxy("ChatHub");
             hubProxy.On<User>("ParticipantLogin", (u) => ParticipantLoggedIn?.Invoke(u));
             hubProxy.On<string>("ParticipantLogout", (n) => ParticipantLoggedOut?.Invoke(n));
             hubProxy.On<string>("ParticipantDisconnection", (n) => ParticipantDisconnected?.Invoke(n));
             hubProxy.On<string>("ParticipantReconnection", (n) => ParticipantReconnected?.Invoke(n));
-            hubProxy.On<string, string, Aes>("BroadcastTextMessage", (n, m, p) => NewTextMessage?.Invoke(n, m, MessageType.Broadcast, p));
-            hubProxy.On<string, byte[]>("BroadcastPictureMessage", (n, m) => NewImageMessage?.Invoke(n, m, MessageType.Broadcast));
             hubProxy.On<string, string, Aes>("UnicastTextMessage", (n, m, p) => NewTextMessage?.Invoke(n, m, MessageType.Unicast, p));
             hubProxy.On<string, byte[]>("UnicastPictureMessage", (n, m) => NewImageMessage?.Invoke(n, m, MessageType.Unicast));
             hubProxy.On<string>("ParticipantTyping", (p) => ParticipantTyping?.Invoke(p));
@@ -78,20 +72,10 @@ namespace ChatClientCS.Services
             await hubProxy.Invoke("Logout");
         }
 
-        public async Task SendBroadcastMessageAsync(string msg)
-        {
-            await hubProxy.Invoke("BroadcastTextMessage", msg);
-            //todo: AesEnc.EncryptStringAes(msg, _myAes.Key, _myAes.IV)
-        }
-
-        public async Task SendBroadcastMessageAsync(byte[] img)
-        {
-            await hubProxy.Invoke("BroadcastImageMessage", img);
-        }
-
         public async Task SendUnicastTextMessageAsync(string recepient, string msg, Aes aes)
         {
             await hubProxy.Invoke("UnicastTextMessage", new object[] { recepient, AesEnc.EncryptStringAes(msg, aes.Key, aes.IV), aes });
+            //todo: Encryption happens here
         }
 
         public async Task SendUnicastMessageAsync(string recepient, byte[] img)
