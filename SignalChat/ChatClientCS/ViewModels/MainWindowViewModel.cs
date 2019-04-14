@@ -364,12 +364,12 @@ namespace ChatClientCS.ViewModels
         #endregion
 
         #region Event Handlers
-        private void NewTextMessage(string name, string msg, MessageType mt, Aes myAes)
+        private void NewTextMessage(string name, string msg, MessageType mt, Aes aes)
         {
 
             if (mt == MessageType.Unicast)
             {
-                ChatMessage cm = new ChatMessage { Author = name, Message = AesEnc.DecryptStringAes(msg, myAes.Key, myAes.IV), Time = DateTime.Now };
+                ChatMessage cm = new ChatMessage { Author = name, Message = AesEnc.DecryptStringAes(msg, aes.Key, aes.IV), Time = DateTime.Now };
                 //todo: receive encrypted message and decrypt
                 var sender = _participants.Where((u) => string.Equals(u.Name, name)).FirstOrDefault();
                 ctxTaskFactory.StartNew(() => sender.Chatter.Add(cm)).Wait();

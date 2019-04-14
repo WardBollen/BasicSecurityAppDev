@@ -24,6 +24,8 @@ namespace ChatClientCS.Services
         Task<List<User>> LoginAsync(string name, byte[] photo);
         Task LogoutAsync();
 
+        Task SendBroadcastMessageAsync(string msg);
+        Task SendBroadcastMessageAsync(byte[] img);
         Task SendUnicastTextMessageAsync(string recepient, string msg, Aes aes);
         Task SendUnicastMessageAsync(string recepient, byte[] img);
         Task TypingAsync(string recepient);

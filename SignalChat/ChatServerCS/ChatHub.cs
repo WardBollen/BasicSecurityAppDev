@@ -62,6 +62,24 @@ namespace ChatServerCS
             }
         }
 
+        public void BroadcastTextMessage(string message)
+        {
+            var name = Clients.CallerState.UserName;
+            if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(message))
+            {
+                Clients.Others.BroadcastTextMessage(name, message);
+            }
+        }
+
+        public void BroadcastImageMessage(byte[] img)
+        {
+            var name = Clients.CallerState.UserName;
+            if (img != null)
+            {
+                Clients.Others.BroadcastPictureMessage(name, img);
+            }
+        }
+
         public void UnicastTextMessage(string recepient, string message, Aes aes)
         {
             var sender = Clients.CallerState.UserName;
